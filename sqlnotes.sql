@@ -1,4 +1,4 @@
-/*CREATE TABLE creates a table
+/*CREATE TABLE creates a table Fitwi/SQL150learn
 --------------------------------------------------*/
 CREATE TABLE "test" (
 	"r1"	INTEGER,
@@ -49,6 +49,21 @@ WITH test1 AS (SELECT * FROM test)
 SELECT * from test1
 WHERE r3>=2;
 
+-- Common Table Expression(CTE): From Alem Fitwi to Gebrelibanos
+WITH cte AS(
+		SELECT AlbumId, Title, ArtistId,
+		   -- create new labels (Generic, Nongeneric, & GenericOnly) using CASE-WHEN-ELSE
+		   CASE 
+			   WHEN  ArtistId  BETWEEN 1 AND 90 THEN 'G'
+			   WHEN  ArtistId  BETWEEN 91 AND 180 THEN 'NG'
+		   ELSE 'GO'       
+		   END AS Category
+		FROM albums
+	    )
+SELECT Category, sum(ArtistId) as ArtistId_sum
+FROM cte
+GROUP BY Category
+ORDER by Category
 /*-----------------------------------------------------------------------
 WHERE is a clause that indicates you want to filter the result set to 
 include only rows where the following condition is true.
@@ -73,4 +88,31 @@ UPDATE statements allow you to edit rows in a table.
 UPDATE table_name
 SET r1 = 7
 WHERE r1 == 1;
+
+
+/*-----------------------------------------------------------------------
+Subqueries
+*/
+SELECT * FROM albums;
+
+-- Subquery in select
+SELECT AlbumId, Title, ArtistId, (SELECT AVG(ArtistId) FROM albums) AS avg1
+FROM albums;
+
+-- with partition by --> over()
+SELECT AlbumId, Title, ArtistId, AVG(ArtistId)  OVER() AS avg1
+FROM albums;
+
+-- Group by  doesn't work
+SELECT AlbumId, Title, ArtistId, AVG(ArtistId) AS avg1
+FROM albums
+GROUP BY AlbumId, Title
+ORDER BY AlbumId;
+
+-- subquery in WHERE
+SELECT AlbumId, Title, ArtistId
+FROM albums
+WHERE AlbumId in (SELECT ArtistId 
+                  FROM artists
+		  WHERE name LIKE 'N%' OR name LIKE'A%')
 
