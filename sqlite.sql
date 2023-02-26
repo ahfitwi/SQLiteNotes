@@ -171,7 +171,7 @@ SELECT REPLACE(FirstName, "J", "A")FROM employees;
 -- 4. OPERATORS
 -- ################################################### 
 -- SQL Operators: 
---            Arithmetic (+, -, *, /), 
+--            Arithmetic (+, -, *, /, %), 
 --            Comparison (>, >=, <, <=, =, <>), &  <> means not equal to
 --            Logical (AND, OR, NOT, BETWEEN, IN, LIKE, IS NULL)
 -- Wild Cards used with LIKE Operator:
@@ -188,11 +188,92 @@ SELECT REPLACE(FirstName, "J", "A")FROM employees;
   WHERE CN LIKE 'a%o'             Finds any values that start with "a" & end with "o"
 */
 
+-- AND, IN, & LIKE
+SELECT *FROM emp
+WHERE Name LIKE "a%" AND age IN(29, 45, 37);
 
+-- OR
+SELECT *FROM emp
+WHERE Name LIKE "a%" OR age IN(29, 45, 37);
+
+-- BETWEEN
+WHERE age BETWEEN 20 AND 35;
+
+-- IS NULL & NOT
+SELECT *FROM emp
+WHERE age IS NOT NULL;
+
+-- NULLIF: Compare two expressions
+--         The NULLIF() function returns NULL if two expressions are equal, otherwise it returns the first expression.
+SELECT NULLIF(25, 25); -- Null
+SELECT NULLIF(34, 25); -- 34
+
+-- Arithmetic
+SELECT *, CAST((age*4+40-100)/50.0 AS float) AS newcol FROM emp;
+SELECT Salary%2 FROM emp;
+SELECT ABS(Salary) FROM emp;
+
+-- GLOB: similar to LIKE, used to search a pattern in a ccolumn.
+--       Unlike LIKE, it is case sensitive
+--       Follows Unix Syntax 
+--       Wildcards used: * and ? --> 
+--                       * zero, one, or multiple
+--                       ? one char only
+SELECT * FROM emp
+WHERE Name glob "A*";
+
+SELECT * FROM emp
+WHERE Name GLOB "?l*"; -- SIngle char before l
+
+
+-- LIMIT:
+SELECT *, CAST((age*4+40-100)/50.0 AS float) AS newcol FROM emp
+LIMIT 1
+
+SELECT * FROM emp
+LIMIT 2 OFFSET 1; --Second row +1 more row
+
+SELECT * FROM emp
+ORDER BY NAME ASC
+LIMIT 2 OFFSET 1 -- after order by
 
 -- 5. AGGREGATE FUNCTIONS
 -- ################################################### 
+-- A function where values of multiple rows are grouped together to form a single value.
+-- COUNT: counts the number of rows in a table
+SELECT count(*) FROM emp;
+-- SUM: calculates the sum of values in agroup
+SELECT sum(Salary) FROM emp
+-- AVG: calculates the average of values
+SELECT avg(Salary) FROM emp
+-- MAX: gets the maximum value in a set of values
+SELECT max(Salary) FROM emp
+-- MIN: gets the minimum value in a set of values
+SELECT min(Salary) FROM emp
+-- STD: calculates the standard deviation
+-- SELECT stdev(Salary) FROM emp
 
+-- Group By: used along with Aggregte Functions
+-- WHERE should be placed before Group BY and Having after group by
+SELECT *FROM Emp
+WHERE Name = "Alem"
+GROUP BY Name
+HAVING sum(Salary) < 500
+ORDER BY name
+
+-- Having: Where clause can't be used after group by for filtering; use having in lieu.
+-- Should come after Group By
+SELECT *, sum(Salary) as tot FROM Emp
+WHERE Name = "Alem"
+GROUP BY af
+HAVING tot > 1500
+ORDER BY name
+
+SELECT *, sum(Salary) FROM Emp
+WHERE Name = "Alem"
+GROUP BY af
+HAVING sum(Salary) < 5000
+ORDER BY name
 
 
 -- 6. JOINS
