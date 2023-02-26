@@ -15,6 +15,38 @@
 -- Use cases of DBMS:Telephone system users' info database, Electric Bill System DBMS
 -- Table: A table is a collection of related data held in a table format within a database. 
 --        It consists of coulumns/ fields/ variables and rows/ records/ observations.
+
+-----------------------------------------
+-- WHat is SQLite? 
+--                  An open source embedded DB
+--                  Serverless and lightweight DB
+--                  Installed as one of the python3 modules
+-- Usecase:
+--          SQLite is used likely more than all other DB engines combined.
+--          SQLite is found in:
+--                              Every Android Device
+--                              Every iPhone and iOS device
+--                              Every Mac
+--                              Every Winows 10 Machine
+--                              Every Firefox, Chrome, and Safari web browser
+--                              Every Instance of Skype.
+
+-- Features of SQLite
+--                SQLIte doesn't require a separate server process or system to operate (serverless)
+--                SQLite comes with zero-configuration, which means no setup or administration needed.
+--                SQLite is self-contained, which means no external dependencies.
+-- Install SQLite:
+--                Install as standard python module
+--                >SQLite3
+-- Create DB:
+--            > sqlite3 alem.db
+--            > .databases
+--                       /home/alem/0_Alem/sqlite/alem.db
+--Tools:
+--      DB Browser
+--      SQLIteStudio
+
+-------------------------------------
 -- primary key: Uniquely identifies each record in the table.
 --              We can have only one Primary key in a table.
 --              Must contain UNIQUE values, and cannot contain NULL values.
@@ -35,6 +67,8 @@
 -- COnstraints: Not Null, Primary Key, Autoincrement, Unique, Default, Collation, Foreign Key
 -- Collation: Binary, Nocase, RTRIM, UTF16, UTF16CI
 -- Type: Integer, Text, BLOB, Real Numeric
+
+------------------------------------------
 
 -- 2. DDL and DML Commands
 -- ###################################################
@@ -94,9 +128,8 @@ WHERE id 124;
 SELECT * FROM emp
 
 -- UNION/UNION ALL: UNION removes duplicate while UNION ALL keeps all
-
 SELECT Name FROM emp
-UNION -- Drops Duplicates; 
+UNION -- Drops Duplicates; expensive in terms of performance
 SELECT LastName FROM employees;
 
 SELECT Name FROM emp
@@ -105,26 +138,38 @@ SELECT LastName FROM employees;
 
 -- 3. STRING MANIPULATION
 -- ###################################################                                 
+-- substr: col, start_index, length
+SELECT LastName, SUBSTR(LastName, 1, 2) AS substrs FROM employees;
+-- 
+
+-- 4. OPERATORS
+-- ################################################### 
+
+
+-- 5. AGGREGATE FUNCTIONS
+-- ################################################### 
+
+
+
+-- 6. JOINS
+-- ################################################### 
+
+
+
+-- 7. SUBQUERY
+-- ################################################### 
                                  
 
--- 4. STRING MANIPULATION
--- ################################################### 
+-- 8. ANALYTICAL FUNCTIONS
+-- ###################################################
 
 
--- 5. STRING MANIPULATION
--- ################################################### 
+-- 9. TRIGGERS IN SQL
+-- ###################################################
 
 
-
--- 6. STRING MANIPULATION
--- ################################################### 
-
-
-
--- 7. STRING MANIPULATION
--- ################################################### 
-                                 
-                                 
+-- 10. ADVANCED CONCEPTS
+-- ###################################################
                                  
                                  
                                  
