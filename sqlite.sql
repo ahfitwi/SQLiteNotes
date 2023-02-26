@@ -1,1 +1,1 @@
---- 
+-- primary key: UNIQUE and cannot be NULL
