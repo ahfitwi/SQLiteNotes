@@ -138,12 +138,56 @@ SELECT LastName FROM employees;
 
 -- 3. STRING MANIPULATION
 -- ###################################################                                 
--- substr: col, start_index, length
+-- SUBSTR: col, start_index, length
 SELECT LastName, SUBSTR(LastName, 1, 2) AS substrs FROM employees;
--- 
+SELECT LastName, SUBSTR(LastName, -1, 2) AS substrs FROM employees;
+
+-- INSTR: returns 1 if matched else 0 --> IN STR
+SELECT INSTR(LastName, "J") FROM employees; -- case sensitive
+
+-- CONCAT --> ||
+SELECT FirstName, LastName, FirstName || ' ' || LastName AS CC FROM employees;
+
+-- UPPER
+SELECT UPPER(FirstName) FROM employees;
+
+-- LOWER
+SELECT LOWER(FirstName) FROM employees;
+
+-- TRIM: trims left and right white spaces
+SELECT TRIM(FirstName) FROM employees;
+SELECT TRIM(FirstName, "@") FROM employees; -- remove @ from both ends
+
+-- LTRIM: trims left white spaces
+SELECT LTRIM(FirstName) FROM employees;
+SELECT LTRIM("@@dfdgd", "@") AS ABC;
+
+-- RTRIM: trims right white spaces
+SELECT RTRIM(FirstName) FROM employees;
+
+-- REPLACE: (X< Y, Z)
+SELECT REPLACE(FirstName, "J", "A")FROM employees; 
 
 -- 4. OPERATORS
 -- ################################################### 
+-- SQL Operators: 
+--            Arithmetic (+, -, *, /), 
+--            Comparison (>, >=, <, <=, =, <>), &  <> means not equal to
+--            Logical (AND, OR, NOT, BETWEEN, IN, LIKE, IS NULL)
+-- Wild Cards used with LIKE Operator:
+--          %: The percent sign represents zero, one, or multiple characters
+--          _: The underscore represents a single character
+/*
+  LIKE OPERATOR                   DEscription
+  -------------------------------------------------
+  WHERE CN LIKE 'a%'              Finds any values that start with "a"
+  WHERE CN LIKE '%a'              Finds any values that end with "a"
+  WHERE CN LIKE '%a%'             Finds any values that have "a" anywhere
+  WHERE CN LIKE '_a%'             Finds any values that have "a" in 2nd position
+  WHERE CN LIKE 'k_%_'            Finds any values that start "k" and are at least 3 chars in length
+  WHERE CN LIKE 'a%o'             Finds any values that start with "a" & end with "o"
+*/
+
 
 
 -- 5. AGGREGATE FUNCTIONS
