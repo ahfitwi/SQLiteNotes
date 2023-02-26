@@ -1,0 +1,11 @@
+# SQLiteNotes
+- Intro
+- DDL, DML, & Set Operators
+- String Manipulation
+- SQL Operators
+- Aggregate Functions
+- Joins
+- Subqueries
+- Analytical Functions
+- Triggers
+- Advanced Concepts
